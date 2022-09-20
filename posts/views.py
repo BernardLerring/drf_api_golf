@@ -15,7 +15,6 @@ class PostList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Post.objects.annotate(
         likes_count=Count('likes', distinct=True),
-        played_count=Count('played', distinct=True),
         comments_count=Count('comment', distinct=True)
     ).order_by('-created_at')
     filter_backends = [
@@ -34,7 +33,6 @@ class PostList(generics.ListCreateAPIView):
     ]
     ordering_fields = [
         'likes_count',
-        'played_count',
         'comments_count',
         'likes__created_at',
     ]
@@ -51,6 +49,5 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Post.objects.annotate(
         likes_count=Count('likes', distinct=True),
-        played_count=Count('played', distinct=True),
         comments_count=Count('comment', distinct=True)
     ).order_by('-created_at')
