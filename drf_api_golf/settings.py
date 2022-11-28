@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 import dj_database_url
 import re
+import mimetypes 
+mimetypes.add_type("text/css", ".css", True)
 
 if os.path.exists('env.py'):
     import env
